@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятори для розрахунку складу палива</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">Калькулятор паливних показників</h1>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="calculator1">Розрахунок складу палива</button>
+            <button class="tab-btn" data-tab="calculator2">Перерахунок складу мазуту</button>
+        </div>
+
+        <!-- Калькулятор 1 -->
+        <div id="calculator1" class="calculator active-calculator">
+            <div class="calculator-header">
+                <h2>Калькулятор складу палива</h2>
+                <p class="description">Розрахунок сухої та горючої маси, теплоти згоряння</p>
+            </div>
+            
+            <div class="input-group">
+                <h3 class="input-title">Вхідні дані (робоча маса)</h3>
+                <div class="input-section">
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label for="hp">H<sup>P</sup>, %</label>
+                            <input type="number" id="hp" step="0.1" placeholder="0.0" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="cp">C<sup>P</sup>, %</label>
+                            <input type="number" id="cp" step="0.1" placeholder="0.0" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="sp">S<sup>P</sup>, %</label>
+                            <input type="number" id="sp" step="0.1" placeholder="0.0" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="np">N<sup>P</sup>, %</label>
+                            <input type="number" id="np" step="0.1" placeholder="0.0" required>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label for="op">O<sup>P</sup>, %</label>
+                            <input type="number" id="op" step="0.1" placeholder="0.0" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="wp">W<sup>P</sup>, %</label>
+                            <input type="number" id="wp" step="0.1" placeholder="0.0" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="ap">A<sup>P</sup>, %</label>
+                            <input type="number" id="ap" step="0.1" placeholder="0.0" required>
+                        </div>
+                        <div class="input-field">
+                            <div class="sum-indicator">
+                                <label>Сума</label>
+                                <div id="sum1" class="sum-value">0%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <button id="calculate1-btn" class="calculate-btn">Розрахувати</button>
+                <button id="reset1-btn" class="reset-btn">Очистити</button>
+            </div>
+
+            <div id="error1" class="error-message"></div>
+
+            <div id="results1" class="results">
+                <h3 class="results-title">Результати розрахунку</h3>
+                
+                <div class="results-grid">
+                    <div class="result-section">
+                        <h4>Коефіцієнти переходу</h4>
+                        <div class="result-item">
+                            <span class="result-label">Робоча → суха маса:</span>
+                            <span id="kpc" class="result-value">0.00</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Робоча → горюча маса:</span>
+                            <span id="kpg" class="result-value">0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="result-section">
+                        <h4>Склад сухої маси</h4>
+                        <div id="dryMass" class="composition-grid"></div>
+                    </div>
+
+                    <div class="result-section">
+                        <h4>Склад горючої маси</h4>
+                        <div id="combustibleMass" class="composition-grid"></div>
+                    </div>
+
+                    <div class="result-section">
+                        <h4>Теплота згоряння</h4>
+                        <div id="heatingValue" class="heating-values"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Калькулятор 2 -->
+        <div id="calculator2" class="calculator">
+            <div class="calculator-header">
+                <h2>Калькулятор для перерахунку складу мазуту</h2>
+                <p class="description">Перерахунок з горючої маси до робочої</p>
+            </div>
+            
+            <div class="input-group">
+                <h3 class="input-title">Вхідні дані (горюча маса)</h3>
+                <div class="input-section">
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label for="cg2">C<sup>Г</sup>, %</label>
+                            <input type="number" id="cg2" step="0.1" placeholder="0.0" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="hg2">H<sup>Г</sup>, %</label>
+                            <input type="number" id="hg2" step="0.1" placeholder="0.0" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="og2">O<sup>Г</sup>, %</label>
+                            <input type="number" id="og2" step="0.1" placeholder="0.0" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="sg2">S<sup>Г</sup>, %</label>
+                            <input type="number" id="sg2" step="0.1" placeholder="0.0" required>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label for="qdaf">Q<sup>daf</sup><sub>i</sub>, МДж/кг</label>
+                            <input type="number" id="qdaf" step="0.1" placeholder="0.0" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="wr2">W<sup>P</sup>, %</label>
+                            <input type="number" id="wr2" step="0.1" placeholder="0.0" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="ad2">A<sup>d</sup>, %</label>
+                            <input type="number" id="ad2" step="0.1" placeholder="0.0" required>
+                        </div>
+                        <div class="input-field">
+                            <div class="sum-indicator">
+                                <label>Сума горючих</label>
+                                <div id="sum2" class="sum-value">0%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label for="v2">Вміст ванадію, мг/кг</label>
+                            <input type="number" id="v2" step="0.1" placeholder="0.0" required>
+                        </div>
+                        <div class="input-field"></div>
+                        <div class="input-field"></div>
+                        <div class="input-field"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <button id="calculate2-btn" class="calculate-btn">Розрахувати</button>
+                <button id="reset2-btn" class="reset-btn">Очистити</button>
+            </div>
+
+            <div id="error2" class="error-message"></div>
+
+            <div id="results2" class="results">
+                <h3 class="results-title">Результати розрахунку</h3>
+                
+                <div class="results-grid">
+                    <div class="result-section">
+                        <h4>Склад робочої маси мазуту</h4>
+                        <div id="workingMass" class="composition-grid"></div>
+                    </div>
+
+                    <div class="result-section">
+                        <h4>Теплота згоряння</h4>
+                        <div id="heatingValue2" class="heating-values"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Калькулятор складу палива</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
